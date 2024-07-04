@@ -11,6 +11,8 @@ check_os(){
     echo "Ubuntu"
   elif [[ "$OS_NAME" == *"Debian"* ]]; then
     echo "Debian"
+  elif [[ "$OS_NAME" == *"Anolis OS"* ]];then
+    echo "Anolis OS"
   else
     echo "Unsupported OS [x]"
     # 进入检测分支

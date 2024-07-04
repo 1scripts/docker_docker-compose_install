@@ -31,30 +31,41 @@ detect_command() {
  fi
 }
 
-# 检测给定URL的响应时间
-measure_response_time() {
-    local url=$1
-    local start=$(date +%s.%N)
-    curl -Is "$url" > /dev/null
-    local end=$(date +%s.%N)
-    # 使用bc计算时间差，并保留3位小数，然后直接输出，避免在整数运算环境下处理
-    echo "$(bc <<< "scale=3; $end - $start")"
+# 架构检测
+check_os_arch() {
+    if [ "$(uname -m)" != "x86_64" ]; then
+        echo "Only supports x86_64 "
+        exit 1
+    fi
 }
 
-# 检查Gitee和GitHub的通信速度并选择最快
+# 选择下载地址
 check_git_speed() {
-    local gitee_url="https://gitee.com"
-    local github_url="https://github.com"
-    printf "选取访问最快的地址..."
-    gitee_time=$(measure_response_time "$gitee_url")
-    github_time=$(measure_response_time "$github_url")
-
-    if (( $(bc <<< "$gitee_time < $github_time") )); then
-        echo "Gitee"
-        url="$gitee_url"
+    local url_xargs=$1
+    local url_1="https://gitee.com"
+    local url_2="https://github.com"
+    local url_3="https://git.homegu.com"
+    if [[ $url_xargs =~ ^[0-9]+$ ]] ; then
+       local url_address=$(url_$(url_xargs))
+       if [ -n "$url_address" ];then
+          url=$url_address
+       else
+          echo "url xargs failed."
+          exit 1
+       fi
     else
-        echo "GitHub"
-        url="$github_url"
+        if [[ $url_xargs == https://* ]]; then
+           local get_url_return=$(curl -Is "$url_xargs" | head -n 1 | awk '{print $2)'
+           if [ "$get_url_return" == "200" ]; then
+              url="$url_xargs"
+           else
+              echo "ERROR: return status $get_url_return"
+              exit 1
+           fi
+        else
+           echo "Requires https:// link or number"
+           exit 1
+        fi
     fi
 }
 
@@ -78,9 +89,11 @@ detect_dir_file() {
 download_install_package() {
    local version=v1.4
    if [ "$url" == "https://gitee.com" ]; then
-      local url_path="https://gitee.com/li_blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="$url/li_blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
    elif [ "$url" == "https://github.com" ]; then
-      local url_path="https://github.com/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+   else
+      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
    fi
    wget $url_path -P /tmp/
    if [ $? -ne 0 ]; then
@@ -100,12 +113,19 @@ execute_install_script() {
    if [ $? -ne 0 ]; then
      echo "ERROR: 执行安装脚本失败."
    fi
+   [ -f /tmp/docker_docker-compose_install.zip ] && rm -rf /tmp/docker_docker-compose_install.zip
 }
 
 # 命令检测
 detect_command
-# 调用函数检查速度
-check_git_speed
+# 检测架构
+check_os_arch
+# 选择下载地址
+if [ -z "$CDN" ];then
+   check_git_speed 2 # default https://github.com
+else
+   check_git_speed $CDN # 1:gitee 2:github 3:git.homegu.com
+fi
 # 检测目录和文件
 detect_dir_file
 # 下载安装包

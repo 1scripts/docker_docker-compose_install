@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# inpt默认值
+inpt=0
+
 check_docker_status(){
   if which docker &>/dev/null; then
     printf "[检测到已安装略过] $(which docker) version:"
@@ -48,12 +51,14 @@ check_os(){
   # 读取/etc/os-release文件中的NAME和VERSION信息
   OS_NAME=$(source /etc/os-release && echo $NAME)
   #OS_VERSION=$(source /etc/os-release && echo $VERSION)
-  if [[ "$OS_NAME" == *"CentOS"* ]]; then
+  if [[ "$OS_NAME" == *"CentOS"* ]];then
     echo "CentOS"
-  elif [[ "$OS_NAME" == *"Ubuntu"* ]]; then
+  elif [[ "$OS_NAME" == *"Ubuntu"* ]];then
     echo "Ubuntu"
-  elif [[ "$OS_NAME" == *"Debian"* ]]; then
+  elif [[ "$OS_NAME" == *"Debian"* ]];then
     echo "Debian"
+  elif [[ "$OS_NAME" == *"Anolis OS"* ]];then
+    echo "Anolis OS"
   else
     echo "Unsupported OS [x]"
     # 进入架构检测分支
@@ -125,7 +130,7 @@ check_docker_package(){
         done
         echo -e "\033[32m----------------------------------------------------\033[0m"
         printf "\n"
-        read -rep "Please select the docker package you want to install: " inpt
+        read -rep "Please select the docker package you want to install(default: $inpt): " inpt
         docker_package_name=${docker_package_number[$inpt]}
      fi
      # END 2024/6/30
