@@ -50,10 +50,10 @@ check_git_speed() {
     github_time=$(measure_response_time "$github_url")
 
     if (( $(bc <<< "$gitee_time < $github_time") )); then
-        echo "Gitee，耗时: $gitee_time 秒"
+        echo "Gitee"
         url="$gitee_url"
     else
-        echo "GitHub，耗时: $github_time 秒"
+        echo "GitHub"
         url="$github_url"
     fi
 }

@@ -28,7 +28,7 @@ root@ubuntu:/home/ubuntu#
 #### 一键安装
 
 ```shell
-bash <(curl -sL https://raw.githubusercontent.com/1scripts/quick_install.sh)
+bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
 
 #### 下载安装包
