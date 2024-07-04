@@ -50,10 +50,10 @@ check_git_speed() {
     github_time=$(measure_response_time "$github_url")
 
     if (( $(bc <<< "$gitee_time < $github_time") )); then
-        echo "Gitee，耗时: $gitee_time 秒"
+        echo "Gitee"
         url="$gitee_url"
     else
-        echo "GitHub，耗时: $github_time 秒"
+        echo "GitHub"
         url="$github_url"
     fi
 }
@@ -80,7 +80,7 @@ download_install_package() {
    if [ "$url" == "https://gitee.com" ]; then
       local url_path="https://gitee.com/li_blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
    elif [ "$url" == "https://github.com" ]; then
-      local url_path="https://github.com/li-blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="https://github.com/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
    fi
    wget $url_path -P /tmp/
    if [ $? -ne 0 ]; then
