@@ -112,7 +112,7 @@ execute_install_script() {
       echo "ERROR: 解压安装包失败."
       exit 1
    fi
-   bash /tmp/docker_docker-compose_script/install.sh
+   cd /tmp/docker_docker-compose_script/ && bash install.sh
    if [ $? -ne 0 ]; then
      echo "ERROR: 执行安装脚本失败."
    fi
