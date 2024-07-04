@@ -45,7 +45,7 @@ bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose
 export CDN=1 && bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
 
-> 时不时也会出现raw.githubusercontent.com地址决绝访问的情况，这里也需要使用镜像站
+> 时不时也会出现raw.githubusercontent.com地址拒绝访问的情况，这里也需要使用镜像站
 
 示例:
 ```shell
