@@ -3,7 +3,7 @@
 ### 介绍
 
 可代替docker官网的一键安装脚本，使用docker包进行离线安装
-> 注意当前只适配了x86_64的centos、ubuntu、debian版本，其他系统版本但是属于x86_64架构的请自行斟酌是否运行,其他架构的操作系统请修改脚本或提交Issues.
+> 注意当前只适配了x86_64的centos、ubuntu、debian,Anolis OS版本，其他系统版本但是属于x86_64架构的请自行斟酌是否运行,其他架构的操作系统请修改脚本或提交Issues.
 
 #### 文件列表
 
@@ -31,7 +31,22 @@ root@ubuntu:/home/ubuntu#
 bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
 
-#### 下载安装包
+> 因中国境内从github地址下载时好时慢，增加选择或手动输入地址功能
+#### 加速地址
+| CDN值| 加速地址|
+|:----:|:-----------------:|
+|  1   | https://gitee.com |
+|  2   | https://github.com |
+|  3   | https://git.homegu.com | 
+| 自定义|
+
+```shell
+export CDN=1 && bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
+```
+> 如果感觉获取脚本还是过慢，自行镜像地址raw链接即可
+
+
+#### 下载离线安装包
 
 > 链接请查看最新发行版本,此处只做示例
 

@@ -46,16 +46,19 @@ check_git_speed() {
     local url_2="https://github.com"
     local url_3="https://git.homegu.com"
     if [[ $url_xargs =~ ^[0-9]+$ ]] ; then
-       local url_address=$(url_$(url_xargs))
-       if [ -n "$url_address" ];then
-          url=$url_address
+       if [ "$url_xargs" == "1" ]; then
+           url=$url_1
+       elif [ "$url_xargs" == "2" ]; then
+           url=$url_2
+       elif [ "$url_xargs" == "3" ]; then
+           url=$url_3
        else
-          echo "url xargs failed."
-          exit 1
+           echo "Number failed."
+           exit 1
        fi
     else
         if [[ $url_xargs == https://* ]]; then
-           local get_url_return=$(curl -Is "$url_xargs" | head -n 1 | awk '{print $2)'
+           local get_url_return=$(curl -Is "$url_xargs" | head -n 1 | awk '{print $2)')
            if [ "$get_url_return" == "200" ]; then
               url="$url_xargs"
            else
@@ -78,10 +81,10 @@ detect_dir_file() {
         mkdir -p "$dir"
     fi
     if [ -d "$dir2" ]; then
-        mv "$dir2" "$dir2$(date +%Y-%m-%d_%H-%M-%S)"
+        mv "$dir2" "$(date +%Y-%m-%d_%H-%M-%S)_$dir2"
     fi
     if [ -f "$file1" ]; then
-        mv "$file1" "$file1$(date +%Y-%m-%d_%H-%M-%S)"
+        mv "$file1" "$(date +%Y-%m-%d_%H-%M-%S)_$file1"
     fi
 }
 
