@@ -31,7 +31,7 @@ root@ubuntu:/home/ubuntu#
 bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
 
-> 因中国境内从github地址下载时好时慢，增加选择或手动输入地址功能
+> 中国境内从github地址下载时好时慢，增加选择或手动输入地址功能，根据需要进行选择
 #### 加速地址
 | CDN值| 加速地址|
 |:----:|:-----------------:|
@@ -43,7 +43,7 @@ bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose
 ```shell
 export CDN=1 && bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
-> 如果感觉获取脚本还是过慢，自行镜像地址raw链接即可
+> 如果感觉获取脚本还是过慢，自行替换成镜像地址raw链接即可
 
 
 #### 下载离线安装包

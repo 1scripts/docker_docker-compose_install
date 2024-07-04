@@ -76,7 +76,7 @@ check_git_speed() {
 detect_dir_file() {
     local dir1=/tmp/
     local dir2=/tmp/docker_docker-compose_script/
-    local file1=/tmp/docker_docker-compose_install.zip
+    local file1=/tmp/docker_docker-compose_script.zip
     if [ ! -d "$dir1" ]; then
         mkdir -p "$dir"
     fi
@@ -92,11 +92,11 @@ detect_dir_file() {
 download_install_package() {
    local version=v1.4
    if [ "$url" == "https://gitee.com" ]; then
-      local url_path="$url/li_blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="$url/li_blog/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_script.zip"
    elif [ "$url" == "https://github.com" ]; then
-      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_script.zip"
    else
-      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_install.zip"
+      local url_path="$url/1scripts/docker_docker-compose_install/releases/download/docker_docker_compose_$version/docker_docker-compose_script.zip"
    fi
    wget $url_path -P /tmp/
    if [ $? -ne 0 ]; then
@@ -107,7 +107,7 @@ download_install_package() {
 
 # 执行安装脚本
 execute_install_script() {
-   unzip /tmp/docker_docker-compose_install.zip -d /tmp/
+   unzip /tmp/docker_docker-compose_script.zip -d /tmp/
    if [ $? -ne 0 ]; then
       echo "ERROR: 解压安装包失败."
       exit 1
@@ -116,7 +116,7 @@ execute_install_script() {
    if [ $? -ne 0 ]; then
      echo "ERROR: 执行安装脚本失败."
    fi
-   [ -f /tmp/docker_docker-compose_install.zip ] && rm -rf /tmp/docker_docker-compose_install.zip
+   [ -f /tmp/docker_docker-compose_script.zip ] && rm -rf /tmp/docker_docker-compose_script.zip
 }
 
 # 命令检测
