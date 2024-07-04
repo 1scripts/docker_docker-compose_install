@@ -116,8 +116,18 @@ execute_install_script() {
    if [ $? -ne 0 ]; then
      echo "ERROR: 执行安装脚本失败."
    fi
-   [ -f /tmp/docker_docker-compose_script.zip ] && rm -rf /tmp/docker_docker-compose_script.zip
-   [ -d /tmp/docker_docker-compose_script ] && rm -rf /tmp/docker_docker-compose_script
+   if [ -f /tmp/docker_docker-compose_script.zip ];then
+      read -rp "remove /tmp/docker_docker-compose_script.zip(y/n): " inptu
+      if [ "$inptu" == "y" ] || [ "$inptu" == "Y" ]; then
+         rm -rf /tmp/docker_docker-compose_script.zip
+      fi
+   fi
+   if [ -d /tmp/docker_docker-compose_script ];then
+       read -rp "remove /tmp/docker_docker-compose_script(y/n): " inptu
+       if [ "$inptu" == "y" ] || [ "$inptu" == "Y" ]; then
+          rm -rf /tmp/docker_docker-compose_script
+       fi
+   fi
 }
 
 # 命令检测
