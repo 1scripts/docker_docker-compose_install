@@ -75,16 +75,16 @@ check_git_speed() {
 # 检测目录和文件
 detect_dir_file() {
     local dir1=/tmp/
-    local dir2=/tmp/docker_docker-compose_script/
-    local file1=/tmp/docker_docker-compose_script.zip
+    local dir2=docker_docker-compose_script
+    local file1=docker_docker-compose_script.zip
     if [ ! -d "$dir1" ]; then
         mkdir -p "$dir"
     fi
-    if [ -d "$dir2" ]; then
-        mv "$dir2" "$(date +%Y-%m-%d_%H-%M-%S)_$dir2"
+    if [ -d "$dir1/$dir2" ]; then
+       cd "$dir1" &&  mv "$dir2" "$(date +%Y-%m-%d_%H-%M-%S)_$dir2"
     fi
-    if [ -f "$file1" ]; then
-        mv "$file1" "$(date +%Y-%m-%d_%H-%M-%S)_$file1"
+    if [ -f "$dir1/$file1" ]; then
+       cd $dir1 &&  mv "$file1" "$(date +%Y-%m-%d_%H-%M-%S)_$file1"
     fi
 }
 
@@ -117,6 +117,7 @@ execute_install_script() {
      echo "ERROR: 执行安装脚本失败."
    fi
    [ -f /tmp/docker_docker-compose_script.zip ] && rm -rf /tmp/docker_docker-compose_script.zip
+   [ -d /tmp/docker_docker-compose_script ] && rm -rf /tmp/docker_docker-compose_script
 }
 
 # 命令检测
