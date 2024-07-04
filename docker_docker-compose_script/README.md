@@ -49,7 +49,7 @@ export CDN=1 && bash <(curl -sL https://raw.githubusercontent.com/1scripts/docke
 
 示例:
 ```shell
-export CDN=1 && url_address=raw.yzuu.cf & bash <(curl -sL https://${url_address}/1scripts/docker_docker-compose_install/main/quick_install.sh)
+export CDN=1 && url_address=raw.yzuu.cf && bash <(curl -sL https://${url_address}/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
 
 
