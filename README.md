@@ -32,7 +32,7 @@ bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose
 ```
 
 > 中国境内从github地址下载时好时慢，增加选择或手动输入地址功能，根据需要进行选择
-#### 加速地址
+#### 下载加速地址
 | CDN值| 加速地址|
 |:----:|:-----------------:|
 |  1   | https://gitee.com |
@@ -40,10 +40,17 @@ bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose
 |  3   | https://git.homegu.com | 
 | 自定义|
 
+示例:
 ```shell
 export CDN=1 && bash <(curl -sL https://raw.githubusercontent.com/1scripts/docker_docker-compose_install/main/quick_install.sh)
 ```
-> 如果感觉获取脚本还是过慢，自行替换成镜像地址raw链接即可
+
+> 时不时也会出现raw.githubusercontent.com地址决绝访问的情况，这里也需要使用镜像站
+
+示例:
+```shell
+export CDN=1 && url_address=raw.yzuu.cf & bash <(curl -sL https://${url_address}/1scripts/docker_docker-compose_install/main/quick_install.sh)
+```
 
 
 #### 下载离线安装包
